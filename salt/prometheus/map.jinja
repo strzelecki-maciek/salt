@@ -1,0 +1,17 @@
+{% set defaults = {
+	'alertmanager': {
+		'docker_tag': 'v0.9.1',
+		'docker_image': 'prom/alertmanager',
+		'config_path': '/mnt/alertmanager/config',
+    },
+	'prometheus': {
+		'docker_tag': 'v1.8.1',
+		'docker_image': 'prom/prometheus',
+		'config_path': '/mnt/prometheus/config',
+		'data_path': '/mnt/prometheus/data',
+    },
+
+}%}
+
+{% set settings = salt['pillar.get']('prometheus', default=defaults,
+merge=True) %}
