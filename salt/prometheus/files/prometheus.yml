@@ -1,11 +1,11 @@
 {% from "prometheus/prometheus.map" import prometheus with context %}
 
 global:
-  scrape_interval: 30s
-  scrape_timeout: 10s
+  scrape_interval: {{ prometheus.global.scrape_interval }}
+  scrape_timeout: {{ prometheus.global.scrape_timeout }}
   evaluation_interval: 30s
   external_labels:
-    monitor: prometheus-monitor
+    monitor: {{ prometheus.global.monitor }}
 alerting:
   alertmanagers:
   - static_configs:

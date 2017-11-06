@@ -1,12 +1,12 @@
 {% from "prometheus/alertmanager.map" import alertmanager with context %}
 
 include:
-  - prometheus.docker_deps
+  - docker.deps
 
 alertmanager_config:
   file.managed:
     - template: jinja
-    - source: salt://prometheus/files/alertmanager.yml
+    - source: salt://alertmanager/files/alertmanager.yml
     - name: {{ alertmanager.config_path }}/config.yml 
 
 alertmanager:
@@ -16,9 +16,6 @@ alertmanager:
     - memory: 512M
     - binds:
       - {{ alertmanager.config_path }}:/etc/alertmanager:rw
-    - ulimits:
-      - nofile=65000:65000
-      - nproc=60
     - watch_action: SIGHUP
     - port_bindings:
       - 9093:9093
