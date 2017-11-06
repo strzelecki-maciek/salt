@@ -1,15 +1,48 @@
+{% from "prometheus/prometheus.map" import prometheus with context %}
+
 global:
-  scrape_interval: 15s
+  scrape_interval: 30s
   scrape_timeout: 10s
-  evaluation_interval: 15s
+  evaluation_interval: 30s
   external_labels:
-    monitor: my-monitor-1
+    monitor: prometheus-monitor
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
+    scheme: http
+    timeout: 10s
+rule_files:
+{% for rule_file in prometheus['rule_files'] -%} 
+  - {{ rule_file }}
+{% endfor -%}
 scrape_configs:
 - job_name: prometheus
-  scrape_interval: 15s
+  scrape_interval: 30s
   scrape_timeout: 10s
   metrics_path: /metrics
   scheme: http
   static_configs:
   - targets:
     - localhost:9090
+{% for name, data in prometheus.jobs.items() %}
+- job_name: {{ name }}
+  {% if data['scrape_interval'] is defined -%}
+  scrape_interval: {{ data['scrape_interval'] }}
+  {% endif -%}
+  metrics_path: /metrics
+  scheme: http
+  {{ data['config']|yaml(False)|indent(4) }}
+  {% if data['relabel'] %}
+  relabel_configs:
+    - source_labels: ['__address__']
+      target_label: instance
+      regex:  '(.*)'
+      replacement: "${1}"
+    - source_labels: ['__address__']
+      target_label: __address__
+      regex:  '(.*)'
+      replacement: "${1}:{{ data['port'] }}"
+  {% endif %}
+{% endfor %}

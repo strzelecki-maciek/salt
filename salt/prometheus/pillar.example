@@ -1,0 +1,52 @@
+prometheus:
+  deployment: 'docker|deb'
+  rule_files:
+    - /etc/prometheus/alert_rules/*
+  jobs:
+    node:
+      port: 9100
+      scrape_interval: 30s
+      relabel: no
+      config:
+        static_configs:
+          - targets:
+            - host1 
+    apache:
+      port: 9117
+      scrape_interval: 30s
+      relabel: no
+      config:
+        static_configs:
+          - targets:
+            - host2 
+    test:
+      port: 9118
+      scrape_interval: 30s
+      relabel: no
+      config:
+        file_sd_configs:
+          - files:
+            - '/etc/prometheus/autodiscovery/test/*.json'
+  alerts:
+    node:
+{% raw %}
+    - name: Node_Down
+      if: up == 0
+      for: 10s
+      labels:
+        severity: critical
+        type: infra
+      annotations:
+        summary: "node {{$labels.instance}} is down"
+        description: "{{$labels.instance}} is not available"
+
+    - name: Node_Load_warn
+      if: node_load1  > 10
+      for: 3m
+      labels:
+        severity: warning
+        type: infra
+      annotations: 
+        summary: "node {{$labels.instance}}: load high (current value: {{ $value }})"
+        description: "{{$labels.instance}} has high load since more then 5 minutes"
+{% endraw %}

@@ -1,0 +1,10 @@
+{% set defaults = {
+    'docker_tag': 'v1.8.1',
+    'docker_image': 'prom/prometheus',
+    'config_path': '/mnt/prometheus/config',
+    'data_path': '/mnt/prometheus/data',
+    'alert_rules_path': '/mnt/prometheus/config/alert_rules',
+}%}
+
+{% set prometheus = salt['pillar.get']('prometheus', default=defaults,
+merge=True) %}

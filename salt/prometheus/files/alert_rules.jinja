@@ -1,0 +1,16 @@
+{% from "prometheus/prometheus.map" import prometheus with context %}
+
+{% set alerts = prometheus['alerts'][alert_group] %}
+
+{% for alert in alerts %}
+ALERT {{ alert.name }}
+  IF {{ alert.if }}
+  FOR {{ alert.for }}
+  LABELS { {% for k,v in alert.labels.items() -%} {{ k }} = "{{ v }}", {% endfor -%} }
+  ANNOTATIONS {
+    {% for k,v in alert.annotations.items() -%} 
+    {{ k }} = "{{ v }}", 
+    {% endfor -%}
+  }
+
+{% endfor %}

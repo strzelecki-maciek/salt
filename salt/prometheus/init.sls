@@ -1,3 +1,16 @@
+{% from "prometheus/prometheus.map" import prometheus with context %}
+
+{% if prometheus.deployment == 'docker' %}
+
 include:
-  - prometheus.docker.prometheus
-  - prometheus.docker.alertmanager
+  - docker.deps
+  - prometheus.as_docker
+  - prometheus.config
+
+{% else %}
+
+include:
+  - prometheus.as_deb
+  - prometheus.config
+
+{% endif %}

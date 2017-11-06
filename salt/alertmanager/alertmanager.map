@@ -1,0 +1,8 @@
+{% set defaults = {
+    'docker_tag': 'v0.9.1',
+    'docker_image': 'prom/alertmanager',
+    'config_path': '/mnt/alertmanager/config',
+}%}
+
+{% set alertmanager = salt['pillar.get']('alertmanager', default=defaults,
+merge=True) %}
