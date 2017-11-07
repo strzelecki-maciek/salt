@@ -18,14 +18,6 @@ rule_files:
   - {{ rule_file }}
 {% endfor -%}
 scrape_configs:
-- job_name: prometheus
-  scrape_interval: 30s
-  scrape_timeout: 10s
-  metrics_path: /metrics
-  scheme: http
-  static_configs:
-  - targets:
-    - localhost:9090
 {% for name, data in prometheus.jobs.items() %}
 - job_name: {{ name }}
   {% if data['scheme'] is defined -%}
