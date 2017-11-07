@@ -28,13 +28,24 @@ scrape_configs:
     - localhost:9090
 {% for name, data in prometheus.jobs.items() %}
 - job_name: {{ name }}
+  {% if data['scheme'] is defined -%}
+  scheme: {{ data['scheme'] }}
+  {% else -%}
+  scheme: http
+  {% endif -%}
   {% if data['scrape_interval'] is defined -%}
   scrape_interval: {{ data['scrape_interval'] }}
   {% endif -%}
+  {% if data['honor_labels'] is defined -%}
+  honor_labels: {{ data['honor_labels'] }}
+  {% endif -%}
+  {% if data['metrics_path'] is defined -%}
+  metrics_path: {{ data['metrics_path'] }}
+  {% else -%}
   metrics_path: /metrics
-  scheme: http
-  {{ data['config']|yaml(False)|indent(4) }}
-  {% if data['relabel'] %}
+  {% endif -%}
+  {{ data['config']|indent(2) }}
+  {% if data['relabel'] is defined %}
   relabel_configs:
     - source_labels: ['__address__']
       target_label: instance

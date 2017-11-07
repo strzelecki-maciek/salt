@@ -1,0 +1,5 @@
+salt-ssh:
+  extra_filerefs:
+  - salt://prometheus/prometheus.map
+  - salt://alertmanager/alertmanager.map
+
