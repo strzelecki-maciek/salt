@@ -1,5 +1,5 @@
 {% set defaults = {
-    'docker_tag': 'v1.8.1',
+    'version': 'v1.8.1',
     'docker_image': 'prom/prometheus',
     'config_path': '/mnt/prometheus/config',
     'data_path': '/mnt/prometheus/data',

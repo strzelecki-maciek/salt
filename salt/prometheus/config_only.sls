@@ -11,7 +11,7 @@ prometheus_config:
 {{ prometheus.alert_rules_path }}/{{ alert_group }}.rules:
   file.managed:
     - template: jinja
-    - source: salt://prometheus/files/alert_rules.jinja
+    - source: salt://prometheus/files/alert_rules_{{ prometheus.version }}.jinja
     - makedirs: True
     - context:
       alert_group: {{ alert_group }}

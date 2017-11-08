@@ -2,7 +2,7 @@
 
 prometheus:
   docker_container.running:
-    - image: {{ prometheus.docker_image }}:{{ prometheus.docker_tag }}
+    - image: {{ prometheus.docker_image }}:{{ prometheus.version }}
     - memory_swap: -1
     - memory: 2048M
     - binds:
