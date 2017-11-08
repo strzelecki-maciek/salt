@@ -2,7 +2,7 @@
 
 alertmanager:
   docker_container.running:
-    - image: {{ alertmanager.docker_image }}:{{ alertmanager.docker_tag }}
+    - image: {{ alertmanager.docker_image }}:{{ alertmanager.version }}
     - memory_swap: -1
     - memory: 256M
     - binds:
@@ -12,5 +12,5 @@ alertmanager:
 #      - nofile=65000:65000
 #      - nproc=60
     - port_bindings:
-      - 9090:9090
+      - 9093:9093
     - watch_action: SIGHUP

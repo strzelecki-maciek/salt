@@ -1,7 +1,10 @@
 {% set defaults = {
-    'docker_tag': 'v0.9.1',
+    'version': 'v0.9.1',
     'docker_image': 'prom/alertmanager',
     'config_path': '/mnt/alertmanager/config',
+    'smtp_smarthost': 'localhost:25',
+    'smtp_from': 'alertmanager@box',
+    'smtp_require_tls': 'true',
 }%}
 
 {% set alertmanager = salt['pillar.get']('alertmanager', default=defaults,

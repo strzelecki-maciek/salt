@@ -29,24 +29,13 @@ prometheus:
             - '/etc/prometheus/autodiscovery/test/*.json'
   alerts:
     node:
-{% raw %}
-    - name: Node_Down
-      if: up == 0
-      for: 10s
-      labels:
-        severity: critical
-        type: infra
-      annotations:
-        summary: "node {{$labels.instance}} is down"
-        description: "{{$labels.instance}} is not available"
-
-    - name: Node_Load_warn
-      if: node_load1  > 10
-      for: 3m
-      labels:
-        severity: warning
-        type: infra
-      annotations: 
-        summary: "node {{$labels.instance}}: load high (current value: {{ $value }})"
-        description: "{{$labels.instance}} has high load since more then 5 minutes"
-{% endraw %}
+      - alert: node_down
+        expr: up == 0
+        for: 60s
+        labels:
+          severity: critical
+          type: infra
+          service: node
+        annotations:
+          summary: "{{'{{'}}$labels.instance{{'}}'}} is down"
+          description: "{{'{{'}}$labels.instance{{'}}'}} is down"

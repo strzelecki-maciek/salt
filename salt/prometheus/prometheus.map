@@ -4,6 +4,7 @@
     'config_path': '/mnt/prometheus/config',
     'data_path': '/mnt/prometheus/data',
     'alert_rules_path': '/mnt/prometheus/config/alert_rules',
+    'alertmanager': '127.0.0.1:9093',
     'global': {
       'scrape_interval': '30s',
       'scrape_timeout': '30s',

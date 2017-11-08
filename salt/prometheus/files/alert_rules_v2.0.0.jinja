@@ -3,16 +3,4 @@
 groups:
   - name: {{ alert_group }}.rules
     rules:
-{% for alert in alerts %}
-      - alert: {{ alert.name }}
-        expr: {{ alert.if }}
-        for: {{ alert.for }}
-        labels:
-          {% for k,v in alert.labels.items() -%} 
-          {{ k }}: {{ v }} 
-          {% endfor -%} # 
-        annotations:
-          {% for k,v in alert.annotations.items() -%} 
-          {{ k }}: {{ v }} 
-          {% endfor -%}
-{% endfor %}
+{{ alerts|yaml(False)|indent(6,true) }}

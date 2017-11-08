@@ -10,7 +10,7 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - localhost:9093
+      - {{ prometheus.alertmanager }}
     scheme: http
     timeout: 10s
 rule_files:
