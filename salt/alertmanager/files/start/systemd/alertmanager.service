@@ -1,0 +1,15 @@
+{% from "alertmanager/alertmanager.map" import alertmanager with context %}
+[Unit]
+Description=Alertmanager
+Documentation=None
+After=network.target
+
+[Service]
+LimitNOFILE=16384
+Type=simple
+NotifyAccess=all
+ExecStart={{ alertmanager.dir }}/alertmanager-{{ alertmanager.version }}.linux-amd64/alertmanager -config.file={{ alertmanager.config_path }}/config.yml -mesh.peer={{ alertmanager.mesh_peer }}:6783 
+
+[Install]
+WantedBy=multi-user.target
+

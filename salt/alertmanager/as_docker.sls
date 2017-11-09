@@ -2,7 +2,7 @@
 
 alertmanager:
   docker_container.running:
-    - image: {{ alertmanager.docker_image }}:{{ alertmanager.version }}
+    - image: {{ alertmanager.docker_image }}:v{{ alertmanager.version }}
     - memory_swap: -1
     - memory: 256M
     - binds:

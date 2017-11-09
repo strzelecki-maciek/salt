@@ -10,7 +10,7 @@ include:
 {% else %}
 
 include:
-  - alertmanager.as_deb
+  - alertmanager.as_default
   - alertmanager.config
 
 {% endif %}

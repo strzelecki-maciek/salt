@@ -1,5 +1,8 @@
 {% set defaults = {
-    'version': 'v0.9.1',
+    'start_with': 'upstart',
+    'version': '0.9.1',
+    'user': 'promadm',
+    'dir': '/home/promadm',
     'docker_image': 'prom/alertmanager',
     'config_path': '/mnt/alertmanager/config',
     'smtp_smarthost': 'localhost:25',
