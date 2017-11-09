@@ -3,6 +3,8 @@ base:
     - base.grains
     - salt
 
+{% if grains['env'] is defined %}
+
   'roles:docker':
     - match: grain
     - docker
@@ -14,3 +16,5 @@ base:
   'roles:prometheus':
     - match: grain
     - prometheus
+
+{% endif %}
