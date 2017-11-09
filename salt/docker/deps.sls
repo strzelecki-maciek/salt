@@ -1,7 +1,14 @@
-python-pip:
-  pkg.installed
+fix-pip:
+  cmd.run:
+    - name: easy_install pip
+    - unless: pip -V
 
-install_dockerpy:
-  pip.installed:
-    - name: docker
-    - upgrade: True
+pip-docker-py:
+  cmd.run:
+    - name: /usr/local/bin/pip install docker-py
+    - unless: pip freeze -l | grep "docker-py=="
+
+pip-docker:
+  cmd.run:
+    - name: /usr/local/bin/pip install docker
+    - unless: pip freeze -l | grep "docker=="

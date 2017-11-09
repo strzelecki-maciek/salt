@@ -12,7 +12,7 @@ alerting:
     - targets:
       {% for am in prometheus.alertmanagers -%}
       - {{ am }}
-      {% endfor -%}
+      {% endfor %}
     scheme: http
     timeout: 10s
 rule_files:

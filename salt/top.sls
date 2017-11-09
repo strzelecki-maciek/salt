@@ -1,6 +1,7 @@
 base:
   '*':
     - base.grains
+    - salt
 
   'roles:docker':
     - match: grain

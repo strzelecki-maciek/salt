@@ -2,4 +2,5 @@
 {{ k }}:
   grains.present:
     - value: {{ v }}
+    - force: True
 {% endfor -%}
