@@ -10,7 +10,9 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - {{ prometheus.alertmanager }}
+      {% for am in prometheus.alertmanagers -%}
+      - {{ am }}
+      {% endfor -%}
     scheme: http
     timeout: 10s
 rule_files:

@@ -1,0 +1,38 @@
+{% set defaults = {
+  'foo':       'bar',
+} %}
+
+{% set lookup_table = {
+  'Arch': {
+    'version': '2.8',
+  },
+  'Debian': {
+    'version': '2.8',
+  },
+  'RedHat': {
+    'version': '2.8',
+  },
+  'Ubuntu': {
+    'zesty': {
+        'repo': 'zesty',
+        'version': '17.09.0~ce-0~ubuntu',
+    },
+    'xenial': {
+        'repo': 'xenial',
+        'version': '17.09.0~ce-0~ubuntu',
+    },
+    'artful': {
+        'repo': 'xenial',
+        'version': '17.09.0~ce-0~ubuntu',
+    },
+  }
+} %}
+
+
+{% set os_map = lookup_table.get(grains.os, {}) %}
+{% set oscodename_map = os_map.get(grains.oscodename, {}) %}
+
+{% set docker = {} %}
+{% do docker.update(oscodename_map) %}
+{% do docker.update(defaults) %}
+{% do docker.update(salt['pillar.get']('docker', {})) %} 
