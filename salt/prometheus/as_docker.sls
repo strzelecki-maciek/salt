@@ -1,5 +1,10 @@
 {% from "prometheus/prometheus.map" import prometheus with context %}
 
+{{ prometheus.data_path }}:
+  file.directory:
+    - makedirs: True
+    - mode: 0777
+
 prometheus:
   docker_container.running:
     - image: {{ prometheus.docker_image }}:{{ prometheus.version }}

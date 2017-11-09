@@ -7,6 +7,10 @@ global:
   external_labels:
     monitor: {{ prometheus.global.monitor }}
 alerting:
+  alert_relabel_configs:
+    - source_labels: [monitor]
+      regex: (.+)\d+
+      target_label: monitor
   alertmanagers:
   - static_configs:
     - targets:
