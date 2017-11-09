@@ -15,7 +15,7 @@ alerting:
   - static_configs:
     - targets:
       {% for am in prometheus.alertmanagers -%}
-      - {{ am }}
+      - {{ am }}:{{ prometheus.alertmanager_port }}
       {% endfor %}
     scheme: http
     timeout: 10s
@@ -55,3 +55,22 @@ scrape_configs:
       replacement: "${1}:{{ data['port'] }}"
   {% endif %}
 {% endfor %}
+- job_name: alertmanager
+  scheme: http
+  scrape_interval: 15s
+  metrics_path: /metrics
+  static_configs:
+    - targets:
+      {% for am in prometheus.alertmanagers -%}
+      - {{ am }}
+      {% endfor %}
+  
+  relabel_configs:
+    - source_labels: ['__address__']
+      target_label: instance
+      regex:  '(.*)'
+      replacement: "${1}"
+    - source_labels: ['__address__']
+      target_label: __address__
+      regex:  '(.*)'
+      replacement: "${1}:{{ prometheus.alertmanager_port }}"
