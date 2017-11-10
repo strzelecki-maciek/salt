@@ -3,18 +3,19 @@
 groups:
   - name: {{ alert_group }}.rules
     rules:
-{% for alert in alerts -%}
+      {% for alert in alerts -%}
       - alert: {{ alert.alert }}
         expr: {{ alert.expr }}
         for: {{ alert.for }}
         labels:
           {% for k,v in alert.labels.items() -%}
-          - {{ k }}: {{ v }}
+          {{ k }}: {{ v }}
           {% endfor -%}
-          - format_fix: dontask 
+          format_fix: dontask 
         annotations:
           {% for k,v in alert.annotations.items() -%} 
-          - {{ k }}: {{ v }}
+          {{ k }}: '{{ v }}'
           {% endfor -%}
-{% endfor %}
+          format_fix: dontask 
+      {% endfor %}
 {% set ohgodwhy = "yes, rendering yaml as yaml from pillar data. ;-)" %}

@@ -48,12 +48,8 @@ scrape_configs:
   relabel_configs:
     - source_labels: ['__address__']
       target_label: instance
-      regex:  '(.*)'
+      regex:  '(.*):\d+'
       replacement: "${1}"
-    - source_labels: ['__address__']
-      target_label: __address__
-      regex:  '(.*)'
-      replacement: "${1}:{{ data['port'] }}"
   {% endif %}
   {% endif %}
 {% endfor %}
