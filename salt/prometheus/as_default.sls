@@ -49,3 +49,4 @@ install-prometheus:
 prometheus:
   service.running:
     - enable: True
+    - reload: True

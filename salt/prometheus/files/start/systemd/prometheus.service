@@ -5,7 +5,7 @@ Documentation=None
 After=network.target
 
 [Service]
-LimitNOFILE=16384
+LimitNOFILE=65000
 Type=simple
 NotifyAccess=all
 ExecStart={{ prometheus.dir }}/prometheus-{{ prometheus.version }}.linux-amd64/prometheus --config.file={{ prometheus.config_path }}/prometheus.yml --storage.tsdb.path={{ prometheus.data_dir }} --storage.tsdb.retention {{ prometheus.retention }}

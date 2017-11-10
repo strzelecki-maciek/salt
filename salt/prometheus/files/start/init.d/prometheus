@@ -33,6 +33,7 @@ do_start_prepare()
 
 do_start_cmd()
 {
+    ulimit -n 65000
     do_start_prepare
     echo -n "Starting daemon: "$NAME
 	start-stop-daemon --chdir $WORKING_DIR  --chuid $USER -C --background --start --quiet --pidfile $PIDFILE --make-pidfile --exec $DAEMON -- $ARGS >> $LOGFILE 2>&1
