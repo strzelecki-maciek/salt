@@ -1,5 +1,5 @@
 {% set defaults = {
-    'start_with': 'upstart',
+    'start_with': 'initd',
     'version': '0.9.1',
     'user': 'promadm',
     'dir': '/home/promadm',
