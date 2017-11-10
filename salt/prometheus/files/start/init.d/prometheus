@@ -6,7 +6,7 @@
 # Required-Stop:     $local_fs $network $named $time $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Description:       alert manager for prometheus
+# Description:       prometheus metric collector
 ### END INIT INFO
 
 WORKING_DIR={{ prometheus.dir }}/prometheus-{{ prometheus.version }}.linux-amd64
@@ -91,6 +91,9 @@ case "$1" in
   restart)
     stop
     start
+    ;;
+  reload)
+    killall -HUP prometheus
     ;;
   *)
     echo "Usage: $1 {start|stop|status|restart|uninstall}"
