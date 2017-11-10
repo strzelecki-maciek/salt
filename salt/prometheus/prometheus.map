@@ -1,9 +1,10 @@
 {% set defaults = {
-    'version': 'v1.8.1',
+    'version': '1.8.1',
     'docker_image': 'prom/prometheus',
-    'config_path': '/mnt/prometheus/config',
-    'data_path': '/mnt/prometheus/data',
-    'alert_rules_path': '/mnt/prometheus/config/alert_rules',
+    'config_path': '/etc/prometheus',
+    'data_dir': '/prometheus',
+    'retention': '15d',
+    'alert_rules_path': '/etc/prometheus/alert_rules',
     'alertmanager': '127.0.0.1:9093',
     'global': {
       'scrape_interval': '30s',

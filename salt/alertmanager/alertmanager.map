@@ -3,6 +3,7 @@
     'version': '0.9.1',
     'user': 'promadm',
     'dir': '/home/promadm',
+    'data_dir': '/var/lib/alertmanager',
     'docker_image': 'prom/alertmanager',
     'config_path': '/mnt/alertmanager/config',
     'smtp_smarthost': 'localhost:25',

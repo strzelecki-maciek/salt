@@ -10,7 +10,7 @@ include:
 {% else %}
 
 include:
-  - prometheus.as_deb
+  - prometheus.as_default
   - prometheus.config
 
 {% endif %}

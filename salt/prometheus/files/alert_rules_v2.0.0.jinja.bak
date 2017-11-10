@@ -1,0 +1,10 @@
+{% from "prometheus/prometheus.map" import prometheus with context -%}
+{% set alerts = prometheus['alerts'][alert_group] -%}
+groups:
+  - name: {{ alert_group }}.rules
+    rules:
+{{ alerts|yaml(False)|indent(6,true) }}
+
+# this would be the preferred way if only it was working reliably.
+# on some hosts salt-ssh module renders !!/python/unicode instead
+# of certain character

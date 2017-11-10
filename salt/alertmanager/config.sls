@@ -4,7 +4,7 @@ include:
   - alertmanager.as_docker
 {% else %}
 include:
-  - alertmanager.as_deb
+  - alertmanager.as_default
 {% endif %}
 
 alertmanager_config:

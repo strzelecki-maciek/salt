@@ -1,7 +1,7 @@
-{% from "alertmanager/alertmanager.map" import alertmanager with context %}
+{% from "prometheus/prometheus.map" import prometheus with context %}
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          alertmanager
+# Provides:          prometheus
 # Required-Start:    $local_fs $network $named $time $syslog
 # Required-Stop:     $local_fs $network $named $time $syslog
 # Default-Start:     2 3 4 5
@@ -9,15 +9,15 @@
 # Description:       alert manager for prometheus
 ### END INIT INFO
 
-WORKING_DIR={{ alertmanager.dir }}/alertmanager-{{ alertmanager.version }}.linux-amd64
-DAEMON={{ alertmanager.dir }}/alertmanager-{{ alertmanager.version }}.linux-amd64/alertmanager
-NAME=alertmanager
-USER={{ alertmanager.user }}
-PIDFILE=/var/run/alertmanager/$NAME.pid
-LOGFILE=/var/log/alertmanager/$NAME.log
-DATADIR={{ alertmanager.data_dir }}
+WORKING_DIR={{ prometheus.dir }}/prometheus-{{ prometheus.version }}.linux-amd64
+DAEMON={{ prometheus.dir }}/prometheus-{{ prometheus.version }}.linux-amd64/prometheus
+NAME=prometheus
+USER={{ prometheus.user }}
+PIDFILE=/var/run/prometheus/$NAME.pid
+LOGFILE=/var/log/prometheus/$NAME.log
+DATADIR={{ prometheus.data_dir }}
 
-ARGS="-config.file={{ alertmanager.config_path }}/config.yml -storage.path {{ alertmanager.data_dir }} -mesh.peer={{ alertmanager.mesh_peer }}:6783"
+ARGS="--config.file={{ prometheus.config_path }}/prometheus.yml --storage.tsdb.path={{ prometheus.data_dir }} --storage.tsdb.retention {{ prometheus.retention }}"
 
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 

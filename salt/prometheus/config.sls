@@ -4,7 +4,7 @@ include:
   - prometheus.as_docker
 {% else %}
 include:
-  - prometheus.as_deb
+  - prometheus.as_default
 {% endif %}
 
 prometheus_config:
@@ -26,7 +26,7 @@ prometheus_config:
   file.managed:
     - template: jinja
     - backup: minion
-    - source: salt://prometheus/files/alert_rules_{{ prometheus.version }}.jinja
+    - source: salt://prometheus/files/alert_rules_v{{ prometheus.version }}.jinja
     - makedirs: True
     - context:
       alert_group: {{ alert_group }}
