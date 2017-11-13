@@ -24,8 +24,9 @@ class Script {
             };
 
             finFields.push(elem);
-            finFields.push({title: "description", value: endVal.annotations.description});
+//            finFields.push({title: "description", value: endVal.annotations.description});
             finFields.push({title: "summary", value: endVal.annotations.summary});
+            finFields.push({title: "---------------", value: ""});
         }
 
 

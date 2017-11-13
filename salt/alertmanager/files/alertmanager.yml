@@ -16,4 +16,4 @@ templates:
 - '/etc/alertmanager/template/*.tmpl'
 
 # The root route on which each incoming alert enters.
-{{ alertmanager.config|yaml(False) }}
+{{ alertmanager.config }}

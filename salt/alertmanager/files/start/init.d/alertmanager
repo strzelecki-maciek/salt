@@ -92,6 +92,9 @@ case "$1" in
     stop
     start
     ;;
+  reload)
+    killall -HUP alertmanager 
+    ;;
   *)
     echo "Usage: $1 {start|stop|status|restart|uninstall}"
     exit 1
