@@ -10,12 +10,10 @@ groups:
         labels:
           {% for k,v in alert.labels.items() -%}
           {{ k }}: {{ v }}
-          {% endfor -%}
-          format_fix: dontask 
+          {% endfor -%}# 
         annotations:
           {% for k,v in alert.annotations.items() -%} 
           {{ k }}: '{{ v }}'
-          {% endfor -%}
-          format_fix: dontask 
+          {% endfor -%}#
       {% endfor %}
 {% set ohgodwhy = "yes, rendering yaml as yaml from pillar data. ;-)" %}
